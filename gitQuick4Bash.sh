@@ -83,3 +83,16 @@ function gitprune {
             git remote prune origin --dry-run
     fi
 }
+
+#Git Refresh
+#Use this to refresh (fetch latest) a branch other than your currently active branch.
+#Useful for refreshing a dev branch prior to merging into an active feature branch.
+function gitrefresh {
+    if [ $# -eq 0 ]
+        then
+            ErrorMessage "A branch name must be supplied for refresh!"
+            return 1
+    fi
+
+    git fetch -v origin $1:$1
+}
