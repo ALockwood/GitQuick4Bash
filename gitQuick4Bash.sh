@@ -70,7 +70,7 @@ function gitswitch {
     git fetch origin;
     git clean -fdx; #kiss your local files goodbye
     git reset --hard origin/$1;
-    git pull;
+    git pull -v;
 }
 
 #Git Prune
