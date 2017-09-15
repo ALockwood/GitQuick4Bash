@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #Misc Helpers
 function ErrorMessage() {
     echo -e "\033[1;31m$1\033[0m"
@@ -11,8 +13,28 @@ function gs() {
 
 #Git Push
 function push() {
-    git push
-};
+    pushresult="$(git push 2>&1)"
+    status=$?
+    if [ $status -eq 0 ]; then
+        echo "$pushresult"
+        return 0
+    else
+        #Check the output to see if it's got "git push --set-upstream" in it
+        if [[ "$pushresult" = *"git push --set-upstream"* ]]; then
+            pushcmd=$(echo "$pushresult" | sed -n "/git push --set-upstream/p")
+            if [[ ! -z "$pushcmd" ]]; then
+                cmd=${pushcmd##*( )}
+                echo "Press anything to execute [$cmd], CTRL-C to cancel..."
+                read -p
+                $cmd
+            fi
+        else
+            echo "Unhandled git push result..."
+            echo "$pushresult"
+            return 1
+        fi
+    fi
+}
 
 #GiterDone
 #Stages "all the things" and adds a message
