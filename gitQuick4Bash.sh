@@ -27,6 +27,7 @@ function push() {
                 echo "Press anything to execute [$cmd], CTRL-C to cancel..."
                 read -p
                 $cmd
+                return $?
             fi
         else
             echo "Unhandled git push result..."
