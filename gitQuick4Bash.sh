@@ -24,8 +24,7 @@ function push() {
             pushcmd=$(echo "$pushresult" | sed -n "/git push --set-upstream/p")
             if [[ ! -z "$pushcmd" ]]; then
                 cmd=${pushcmd##*( )}
-                echo "Press anything to execute [$cmd], CTRL-C to cancel..."
-                read -p
+                read -p "Press anything to execute [$cmd], CTRL-C to cancel..."
                 $cmd
                 return $?
             fi
