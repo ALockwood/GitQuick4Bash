@@ -120,7 +120,7 @@ function gitrefresh {
 }
 
 
-#Delete Local Branches
+#Git Delete Local Branches
 #Useful for cleaning up local repositories where remote branches have been deleted.
 #Note: This may list local branches that haven't been pushed. Use with caution.
 function gitdlb {
