@@ -125,7 +125,6 @@ function gitrefresh {
 #Note: This may list local branches that haven't been pushed. Use with caution.
 function gitdlb {
     declare -a LocalBranches
-    pushd ~/src/utils-tools-misc
     IFS=$'\n' LocalBranches=($(git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin)))
 
     if [ ${#LocalBranches[@]} -eq 0 ]; then
